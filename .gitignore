@@ -25,4 +25,6 @@ hs_err_pid*
 
 .gradle
 .idea
+build
 /src/main/resources/config.json
+build/resources/main/config.json

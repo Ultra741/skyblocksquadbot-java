@@ -25,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        builder = JDABuilder.createDefault(Config.getInstance().TOKEN)
+        builder = JDABuilder.createDefault(Config.getToken())
                 .addEventListeners(new Message())
                 .addEventListeners(new GuildReactionAdd());
 
