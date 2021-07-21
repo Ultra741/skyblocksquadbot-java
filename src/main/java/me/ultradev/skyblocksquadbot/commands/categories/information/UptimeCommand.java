@@ -11,7 +11,7 @@ import java.lang.management.ManagementFactory;
 public class UptimeCommand extends Command {
 
     public UptimeCommand() {
-        super("uptime", "Get the bot's uptime.", "uptime", CommandCategory.INFORMATION, CommandPermission.NONE);
+        super("uptime", "Get the bot's uptime.", "uptime", CommandCategory.INFORMATION, CommandPermission.NONE, null);
     }
 
     @Override

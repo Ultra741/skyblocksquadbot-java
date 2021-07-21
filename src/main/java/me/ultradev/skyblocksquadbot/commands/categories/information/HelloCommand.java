@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class HelloCommand extends Command {
 
     public HelloCommand() {
-        super("hello", "Hello. Why not?", "hello", CommandCategory.INFORMATION, CommandPermission.NONE);
+        super("hello", "Hello. Why not?", "hello", CommandCategory.INFORMATION, CommandPermission.NONE, null);
     }
 
     @Override

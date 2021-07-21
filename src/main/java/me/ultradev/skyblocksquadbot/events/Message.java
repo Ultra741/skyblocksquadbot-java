@@ -27,12 +27,16 @@ public class Message extends ListenerAdapter {
 
                 String[] args = event.getMessage().getContentRaw().split(" ");
 
-                if(args[0].equalsIgnoreCase(prefix + element.getName())) {
+                if(args[0].equalsIgnoreCase(prefix + element.getName()) ||
+                        element.getAliases().contains(args[0].substring(1))) {
 
                     CommandPermission permission = element.getPermission();
 
-                    if(permission.getRoleID().equals(String.valueOf(UserUtil.getStaffRank(event.getMember()))) || permission.getRoleID().equalsIgnoreCase("NONE")) {
+                    if(permission.getRoleID().equals(String.valueOf(UserUtil.getStaffRank(event.getMember()))) ||
+                            permission.getRoleID().equalsIgnoreCase("NONE")) {
+
                         element.execute(Main.getBuilder(), event, args);
+
                     }
 
                 }

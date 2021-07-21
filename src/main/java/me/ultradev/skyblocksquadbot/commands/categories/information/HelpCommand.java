@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
     public static String embedDescription = "\n\n[] = required / {} = optional / () = multiple possible arguments";
 
     public HelpCommand() {
-        super("help", "Get a list of commands.", "help", CommandCategory.INFORMATION, CommandPermission.NONE);
+        super("help", "Get a list of commands.", "help", CommandCategory.INFORMATION, CommandPermission.NONE, null);
     }
 
     @Override
