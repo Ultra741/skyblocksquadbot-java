@@ -11,11 +11,12 @@ import java.lang.management.ManagementFactory;
 public class UptimeCommand extends Command {
 
     public UptimeCommand() {
-        super("uptime", "Get the bot's uptime.", "uptime", CommandCategory.INFORMATION, CommandPermission.NONE, null);
+        super("uptime", "Get the bot's uptime.", "uptime",
+                CommandCategory.INFORMATION, CommandPermission.NONE, null);
     }
 
     @Override
-    public boolean execute(JDABuilder builder, MessageReceivedEvent event, String[] args) {
+    public void execute(JDABuilder builder, MessageReceivedEvent event, String[] args) {
 
         // From: https://github.com/DV8FromTheWorld/Yui/blob/master/src/main/java/net/dv8tion/discord/commands/UptimeCommand.java
 
@@ -35,8 +36,6 @@ public class UptimeCommand extends Command {
         uptime = replaceLast(uptime, ",", " and");
 
         event.getChannel().sendMessage(":alarm_clock: Bot uptime: " + uptime).queue();
-
-        return true;
 
     }
 

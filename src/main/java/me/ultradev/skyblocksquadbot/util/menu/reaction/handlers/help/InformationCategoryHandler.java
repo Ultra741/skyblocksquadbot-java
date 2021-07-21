@@ -1,5 +1,6 @@
 package me.ultradev.skyblocksquadbot.util.menu.reaction.handlers.help;
 
+import me.ultradev.skyblocksquadbot.Main;
 import me.ultradev.skyblocksquadbot.commands.Command;
 import me.ultradev.skyblocksquadbot.commands.CommandCategory;
 import me.ultradev.skyblocksquadbot.commands.categories.information.HelpCommand;
@@ -19,11 +20,11 @@ public class InformationCategoryHandler extends MenuReactionHandler {
 
         builder.setTitle("HELP (INFORMATION)")
                 .setDescription(CommandCategory.INFORMATION.getDescription() + " " + HelpCommand.embedDescription)
-                .setColor(me.ultradev.skyblocksquadbot.events.Message.embedColor)
-                .setFooter(me.ultradev.skyblocksquadbot.events.Message.embedFooter);
+                .setColor(Main.embedColor)
+                .setFooter(Main.embedFooter);
 
         for(Command element : CommandCategory.INFORMATION.getCommands()) {
-            builder.addField(me.ultradev.skyblocksquadbot.events.Message.prefix + element.getSyntax(), element.getDescription(), false);
+            builder.addField(Main.prefix + element.getSyntax(), element.getDescription(), false);
         }
 
         message.editMessageEmbeds(builder.build()).queue();

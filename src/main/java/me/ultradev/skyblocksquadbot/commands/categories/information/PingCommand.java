@@ -13,11 +13,12 @@ import java.util.Collections;
 public class PingCommand extends Command {
 
     public PingCommand() {
-        super("ping", "Get the bot's ping.", "ping", CommandCategory.INFORMATION, CommandPermission.NONE, Collections.singletonList("pong"));
+        super("ping", "Get the bot's ping.", "ping",
+                CommandCategory.INFORMATION, CommandPermission.NONE, Collections.singletonList("pong"));
     }
 
     @Override
-    public boolean execute(JDABuilder builder, MessageReceivedEvent event, String[] args) {
+    public void execute(JDABuilder builder, MessageReceivedEvent event, String[] args) {
 
         event.getMessage().getChannel().sendMessage("Ping...").queue((message -> {
 
@@ -25,8 +26,6 @@ public class PingCommand extends Command {
             message.editMessage(":ping_pong: **Ping:** " + ping + " ms\n**Websocket:** " + event.getJDA().getGatewayPing() + " ms").queue();
 
         }));
-
-        return true;
 
     }
 

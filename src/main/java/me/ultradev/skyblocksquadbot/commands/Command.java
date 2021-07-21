@@ -31,7 +31,7 @@ public abstract class Command {
 
     }
 
-    public abstract boolean execute(JDABuilder builder, MessageReceivedEvent event, String[] args);
+    public abstract void execute(JDABuilder builder, MessageReceivedEvent event, String[] args);
 
     public String getName() {
         return name;
