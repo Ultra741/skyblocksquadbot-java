@@ -32,10 +32,15 @@ public class Message extends ListenerAdapter {
 
                     CommandPermission permission = element.getPermission();
 
-                    if(permission.getRoleID().equals(String.valueOf(UserUtil.getStaffRank(event.getMember()))) ||
+
+                    if(permission.getRoleID().equals(UserUtil.getStaffRoleID(event.getMember())) ||
                             permission.getRoleID().equalsIgnoreCase("NONE")) {
 
                         element.execute(Main.getBuilder(), event, args);
+
+                    } else {
+
+                        event.getChannel().sendMessage("**Error:** You don't have permission to do this!").queue();
 
                     }
 

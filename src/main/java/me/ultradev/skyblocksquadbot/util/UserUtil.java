@@ -23,4 +23,24 @@ public class UserUtil {
 
     }
 
+    public static String getStaffRoleID(Member member) {
+
+        int staffRank = getStaffRank(member);
+
+        CommandPermission[] permissions = CommandPermission.values();
+
+        for(int i = 0; i < permissions.length; i++) {
+
+            CommandPermission element = permissions[i];
+
+            if(staffRank == element.getPriority()) {
+                return element.getRoleID();
+            }
+
+        }
+
+        return "";
+
+    }
+
 }
