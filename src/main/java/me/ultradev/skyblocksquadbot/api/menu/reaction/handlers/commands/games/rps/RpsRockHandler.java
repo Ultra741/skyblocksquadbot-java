@@ -9,7 +9,7 @@ public class RpsRockHandler extends MenuReactionHandler {
 
     @Override
     public void onReaction(GuildMessageReactionAddEvent event, Message message, String unicode) {
-        RpsCommand.onReact(message, unicode);
+        RpsCommand.onReact(event, message, unicode);
     }
 
 }

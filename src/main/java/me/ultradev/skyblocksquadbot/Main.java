@@ -41,6 +41,8 @@ public class Main {
 
         new RpsCommand();
 
+        new DebugCommand();
+
         builder.setActivity(Activity.playing("Roblox"));
 
         try {

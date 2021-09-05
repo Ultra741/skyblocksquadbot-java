@@ -3,8 +3,10 @@ package me.ultradev.skyblocksquadbot.commands.categories.games;
 import me.ultradev.skyblocksquadbot.Main;
 import me.ultradev.skyblocksquadbot.api.menu.reaction.MenuReaction;
 import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsPaperHandler;
+import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsPlayAgainHandler;
 import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsRockHandler;
 import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsScissorsHandler;
+import me.ultradev.skyblocksquadbot.api.util.MenuUtil;
 import me.ultradev.skyblocksquadbot.api.util.NumberUtil;
 import me.ultradev.skyblocksquadbot.commands.Command;
 import me.ultradev.skyblocksquadbot.commands.CommandCategory;
@@ -13,9 +15,11 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class RpsCommand extends Command {
 
@@ -27,6 +31,27 @@ public class RpsCommand extends Command {
     @Override
     public void execute(JDABuilder builder, MessageReceivedEvent event, String[] args) {
 
+        Consumer<MenuReaction> consumer = menu -> {
+            menu.getMessage().editMessage("**Timed out.**").queue();
+            menu.getMessage().editMessageEmbeds().queue();
+            menu.getMessage().clearReactions().queue();
+        };
+
+        MenuUtil.removeMenus(event.getAuthor(), "rps_rock", consumer);
+        MenuUtil.removeMenus(event.getAuthor(), "rps_paper");
+        MenuUtil.removeMenus(event.getAuthor(), "rps_scissors");
+        MenuUtil.removeMenus(event.getAuthor(), "rps_play_again", consumer);
+
+        event.getMessage().getChannel().sendMessageEmbeds(getEmbed().build()).queue((message -> {
+            new MenuReaction("rps_rock", new RpsRockHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1FAA8", true);
+            new MenuReaction("rps_paper", new RpsPaperHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1F5D2", true);
+            new MenuReaction("rps_scissors", new RpsScissorsHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+2702", true);
+        }));
+
+    }
+
+    public static EmbedBuilder getEmbed() {
+
         EmbedBuilder embed = new EmbedBuilder();
 
         embed.setTitle("ROCK PAPER SCISSORS")
@@ -34,15 +59,16 @@ public class RpsCommand extends Command {
                 .setColor(Main.embedColor)
                 .setFooter(Main.embedFooter);
 
-        event.getMessage().getChannel().sendMessageEmbeds(embed.build()).queue((message -> {
-            new MenuReaction(new RpsRockHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1FAA8");
-            new MenuReaction(new RpsPaperHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1F5D2");
-            new MenuReaction(new RpsScissorsHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+2702");
-        }));
+        return embed;
 
     }
 
-    public static void onReact(Message message, String unicode) {
+    public static void onReact(GuildMessageReactionAddEvent event, Message message, String unicode) {
+
+        MenuUtil.removeMenus(event.getUser(), "rps_rock");
+        MenuUtil.removeMenus(event.getUser(), "rps_paper");
+        MenuUtil.removeMenus(event.getUser(), "rps_scissors");
+        MenuUtil.removeMenus(event.getUser(), "rps_play_again");
 
         Map<String, String> emojis = new HashMap<>();
         emojis.put("rock", ":moyai:"); emojis.put("paper", ":notepad_spiral:"); emojis.put("scissors", ":scissors:");
@@ -117,7 +143,23 @@ public class RpsCommand extends Command {
         builder.setDescription(descriptionBuilder).setFooter(endMessage);
 
         message.editMessageEmbeds(builder.build()).queue();
+        message.clearReactions().queue((msg) -> {
+            new MenuReaction("rps_play_again", new RpsPlayAgainHandler(), message.getChannel(), event.getUser(), message.getId(), "U+1F504", true);
+        });
+
+
+    }
+
+    public static void playAgain(GuildMessageReactionAddEvent event, Message message) {
+
+        MenuUtil.removeMenus(event.getUser(), "rps_play_again");
+
         message.clearReactions().queue();
+        message.editMessageEmbeds(getEmbed().build()).queue((msg -> {
+            new MenuReaction("rps_rock", new RpsRockHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+1FAA8", true);
+            new MenuReaction("rps_paper", new RpsPaperHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+1F5D2", true);
+            new MenuReaction("rps_scissors", new RpsScissorsHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+2702", true);
+        }));
 
     }
 

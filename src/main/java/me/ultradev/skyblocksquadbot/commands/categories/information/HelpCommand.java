@@ -29,15 +29,16 @@ public class HelpCommand extends Command {
                 .setDescription("See a list of commands categories below! " + embedDescription)
                 .setColor(Main.embedColor)
                 .setFooter(Main.embedFooter)
-                .addBlankField(false)
-                .addField(":information_source: __Information__",
-                        "*" + CommandCategory.INFORMATION.getDescription() + "*\n**" + CommandCategory.INFORMATION.getCommandAmount() + " Commands**", true)
-                .addField(":tada: __Fun & Games__",
-                "*" + CommandCategory.FUN_AND_GAMES.getDescription() + "*\n**" + CommandCategory.FUN_AND_GAMES.getCommandAmount() + " Commands**", true);
+                .addBlankField(false);
+
+        for(CommandCategory category : CommandCategory.values()) {
+            helpEmbed.addField(category.getEmoji() + "__" + category.getName() + "__",
+                    "*" + category.getDescription() + "*\n**" + category.getCommandAmount() + " Commands**", false);
+        }
 
         event.getMessage().getChannel().sendMessageEmbeds(helpEmbed.build()).queue((message -> {
-            new MenuReaction(new InformationCategoryHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+2139");
-            new MenuReaction(new GamesCategoryHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1F389");
+            new MenuReaction("help_information", new InformationCategoryHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+2139", false);
+            new MenuReaction("help_fun_and_games", new GamesCategoryHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1F389", false);
         }));
 
     }
