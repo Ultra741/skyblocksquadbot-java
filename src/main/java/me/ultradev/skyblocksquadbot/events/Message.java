@@ -1,6 +1,7 @@
 package me.ultradev.skyblocksquadbot.events;
 
 import me.ultradev.skyblocksquadbot.Main;
+import me.ultradev.skyblocksquadbot.api.cooldowns.CooldownManager;
 import me.ultradev.skyblocksquadbot.commands.Command;
 import me.ultradev.skyblocksquadbot.commands.CommandPermission;
 import me.ultradev.skyblocksquadbot.api.util.UserUtil;
@@ -25,9 +26,17 @@ public class Message extends ListenerAdapter {
 
                     CommandPermission permission = element.getPermission();
 
-
                     if(permission.getRoleID().equals(UserUtil.getStaffRoleID(event.getMember())) ||
                             permission.getRoleID().equalsIgnoreCase("NONE")) {
+
+                        long cooldownTime = Main.commandCooldowns.getCooldownTime(event.getAuthor());
+                        if(cooldownTime < 5000) {
+                            event.getChannel().sendMessage("**Error:** Please wait **" +
+                                    Main.commandCooldowns.getCooldownString(5000, event.getAuthor()) + "s**!").queue();
+                            return;
+                        }
+
+                        Main.commandCooldowns.setCooldown(event.getAuthor(), System.currentTimeMillis());
 
                         element.execute(Main.getBuilder(), event, args);
 

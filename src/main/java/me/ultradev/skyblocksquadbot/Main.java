@@ -1,5 +1,6 @@
 package me.ultradev.skyblocksquadbot;
 
+import me.ultradev.skyblocksquadbot.api.cooldowns.CooldownManager;
 import me.ultradev.skyblocksquadbot.commands.Command;
 import me.ultradev.skyblocksquadbot.commands.categories.games.RpsCommand;
 import me.ultradev.skyblocksquadbot.commands.categories.information.*;
@@ -26,6 +27,8 @@ public class Main {
 
     public static final Color embedColor = new Color(0x00bfff);
     public static final String embedFooter = "SkyblockSquad Bot - Made for SkyblockSquad Guild";
+
+    public static CooldownManager commandCooldowns = new CooldownManager();
 
     public static void main(String[] args) {
 
