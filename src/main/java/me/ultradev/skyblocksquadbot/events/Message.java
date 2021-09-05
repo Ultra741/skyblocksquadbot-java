@@ -3,7 +3,7 @@ package me.ultradev.skyblocksquadbot.events;
 import me.ultradev.skyblocksquadbot.Main;
 import me.ultradev.skyblocksquadbot.commands.Command;
 import me.ultradev.skyblocksquadbot.commands.CommandPermission;
-import me.ultradev.skyblocksquadbot.util.UserUtil;
+import me.ultradev.skyblocksquadbot.api.util.UserUtil;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

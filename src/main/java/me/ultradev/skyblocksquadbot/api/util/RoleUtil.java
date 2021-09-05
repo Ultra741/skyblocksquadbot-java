@@ -1,4 +1,4 @@
-package me.ultradev.skyblocksquadbot.util;
+package me.ultradev.skyblocksquadbot.api.util;
 
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;

@@ -1,4 +1,4 @@
-package me.ultradev.skyblocksquadbot.util;
+package me.ultradev.skyblocksquadbot.api.util;
 
 import me.ultradev.skyblocksquadbot.Main;
 import me.ultradev.skyblocksquadbot.commands.Command;

@@ -1,7 +1,7 @@
 package me.ultradev.skyblocksquadbot.events;
 
 import me.ultradev.skyblocksquadbot.Main;
-import me.ultradev.skyblocksquadbot.util.menu.reaction.MenuReaction;
+import me.ultradev.skyblocksquadbot.api.menu.reaction.MenuReaction;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

@@ -1,11 +1,12 @@
 package me.ultradev.skyblocksquadbot;
 
 import me.ultradev.skyblocksquadbot.commands.Command;
+import me.ultradev.skyblocksquadbot.commands.categories.games.RpsCommand;
 import me.ultradev.skyblocksquadbot.commands.categories.information.*;
 import me.ultradev.skyblocksquadbot.config.Config;
 import me.ultradev.skyblocksquadbot.events.GuildReactionAdd;
 import me.ultradev.skyblocksquadbot.events.Message;
-import me.ultradev.skyblocksquadbot.util.menu.reaction.MenuReaction;
+import me.ultradev.skyblocksquadbot.api.menu.reaction.MenuReaction;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
@@ -37,6 +38,8 @@ public class Main {
         new PingCommand();
         new UptimeCommand();
         new CmdCommand();
+
+        new RpsCommand();
 
         builder.setActivity(Activity.playing("Roblox"));
 

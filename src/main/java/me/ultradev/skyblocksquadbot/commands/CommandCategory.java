@@ -7,14 +7,17 @@ import java.util.List;
 
 public enum CommandCategory {
 
-    INFORMATION("Information", "Commands that give information.");
+    INFORMATION("Information", "Commands that give information.", ":information_source:"),
+    FUN_AND_GAMES("Fun and Games", "Commands that are some cool minigames.", ":tada:");
 
     private final String name;
     private final String description;
+    private final String emoji;
 
-    CommandCategory(String name, String description) {
+    CommandCategory(String name, String description, String emoji) {
         this.name = name;
         this.description = description;
+        this.emoji = emoji;
     }
 
     public String getName() {
@@ -23,6 +26,10 @@ public enum CommandCategory {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getEmoji() {
+        return emoji;
     }
 
     public int getCommandAmount() {

@@ -1,4 +1,4 @@
-package me.ultradev.skyblocksquadbot.util.menu.reaction;
+package me.ultradev.skyblocksquadbot.api.menu.reaction;
 
 import me.ultradev.skyblocksquadbot.Main;
 import net.dv8tion.jda.api.entities.MessageChannel;

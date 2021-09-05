@@ -4,7 +4,7 @@ import me.ultradev.skyblocksquadbot.Main;
 import me.ultradev.skyblocksquadbot.commands.Command;
 import me.ultradev.skyblocksquadbot.commands.CommandCategory;
 import me.ultradev.skyblocksquadbot.commands.CommandPermission;
-import me.ultradev.skyblocksquadbot.util.MessageUtil;
+import me.ultradev.skyblocksquadbot.api.util.MessageUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

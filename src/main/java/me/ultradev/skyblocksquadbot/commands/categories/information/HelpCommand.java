@@ -4,8 +4,9 @@ import me.ultradev.skyblocksquadbot.Main;
 import me.ultradev.skyblocksquadbot.commands.Command;
 import me.ultradev.skyblocksquadbot.commands.CommandCategory;
 import me.ultradev.skyblocksquadbot.commands.CommandPermission;
-import me.ultradev.skyblocksquadbot.util.menu.reaction.MenuReaction;
-import me.ultradev.skyblocksquadbot.util.menu.reaction.handlers.help.InformationCategoryHandler;
+import me.ultradev.skyblocksquadbot.api.menu.reaction.MenuReaction;
+import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.help.GamesCategoryHandler;
+import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.help.InformationCategoryHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -30,10 +31,13 @@ public class HelpCommand extends Command {
                 .setFooter(Main.embedFooter)
                 .addBlankField(false)
                 .addField(":information_source: __Information__",
-                        "*" + CommandCategory.INFORMATION.getDescription() + "*\n**" + CommandCategory.INFORMATION.getCommandAmount() + " Commands**", true);
+                        "*" + CommandCategory.INFORMATION.getDescription() + "*\n**" + CommandCategory.INFORMATION.getCommandAmount() + " Commands**", true)
+                .addField(":tada: __Fun & Games__",
+                "*" + CommandCategory.FUN_AND_GAMES.getDescription() + "*\n**" + CommandCategory.FUN_AND_GAMES.getCommandAmount() + " Commands**", true);
 
         event.getMessage().getChannel().sendMessageEmbeds(helpEmbed.build()).queue((message -> {
             new MenuReaction(new InformationCategoryHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+2139");
+            new MenuReaction(new GamesCategoryHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1F389");
         }));
 
     }
