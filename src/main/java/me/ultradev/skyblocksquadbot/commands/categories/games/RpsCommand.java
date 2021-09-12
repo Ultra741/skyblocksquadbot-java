@@ -2,10 +2,8 @@ package me.ultradev.skyblocksquadbot.commands.categories.games;
 
 import me.ultradev.skyblocksquadbot.Main;
 import me.ultradev.skyblocksquadbot.api.menu.reaction.MenuReaction;
-import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsPaperHandler;
+import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsOptionHandler;
 import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsPlayAgainHandler;
-import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsRockHandler;
-import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.commands.games.rps.RpsScissorsHandler;
 import me.ultradev.skyblocksquadbot.api.util.MenuUtil;
 import me.ultradev.skyblocksquadbot.api.util.NumberUtil;
 import me.ultradev.skyblocksquadbot.commands.Command;
@@ -43,9 +41,9 @@ public class RpsCommand extends Command {
         MenuUtil.removeMenus(event.getAuthor(), "rps_play_again", consumer);
 
         event.getMessage().getChannel().sendMessageEmbeds(getEmbed().build()).queue((message -> {
-            new MenuReaction("rps_rock", new RpsRockHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1FAA8", true);
-            new MenuReaction("rps_paper", new RpsPaperHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1F5D2", true);
-            new MenuReaction("rps_scissors", new RpsScissorsHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+2702", true);
+            new MenuReaction("rps_rock", new RpsOptionHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1FAA8", true);
+            new MenuReaction("rps_paper", new RpsOptionHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+1F5D2", true);
+            new MenuReaction("rps_scissors", new RpsOptionHandler(), message.getChannel(), event.getAuthor(), message.getId(), "U+2702", true);
         }));
 
     }
@@ -156,9 +154,9 @@ public class RpsCommand extends Command {
 
         message.clearReactions().queue();
         message.editMessageEmbeds(getEmbed().build()).queue((msg -> {
-            new MenuReaction("rps_rock", new RpsRockHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+1FAA8", true);
-            new MenuReaction("rps_paper", new RpsPaperHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+1F5D2", true);
-            new MenuReaction("rps_scissors", new RpsScissorsHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+2702", true);
+            new MenuReaction("rps_rock", new RpsOptionHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+1FAA8", true);
+            new MenuReaction("rps_paper", new RpsOptionHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+1F5D2", true);
+            new MenuReaction("rps_scissors", new RpsOptionHandler(), msg.getChannel(), event.getUser(), msg.getId(), "U+2702", true);
         }));
 
     }

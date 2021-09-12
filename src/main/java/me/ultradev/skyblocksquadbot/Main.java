@@ -2,6 +2,7 @@ package me.ultradev.skyblocksquadbot;
 
 import me.ultradev.skyblocksquadbot.api.cooldowns.CooldownManager;
 import me.ultradev.skyblocksquadbot.commands.Command;
+import me.ultradev.skyblocksquadbot.commands.categories.games.EmojifyCommand;
 import me.ultradev.skyblocksquadbot.commands.categories.games.RpsCommand;
 import me.ultradev.skyblocksquadbot.commands.categories.information.*;
 import me.ultradev.skyblocksquadbot.config.Config;
@@ -37,12 +38,12 @@ public class Main {
                 .addEventListeners(new GuildReactionAdd());
 
         new HelpCommand();
-        new HelloCommand();
         new PingCommand();
         new UptimeCommand();
         new CmdCommand();
 
         new RpsCommand();
+        new EmojifyCommand();
 
         new DebugCommand();
 

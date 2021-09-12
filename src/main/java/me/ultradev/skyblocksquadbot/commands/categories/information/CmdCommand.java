@@ -55,7 +55,7 @@ public class CmdCommand extends Command {
                         .setFooter(Main.embedFooter)
                         .addField("Command Name", element.getName(), false)
                         .addField("Command Description", element.getDescription(), false)
-                        .addField("Command Category", element.getCategory().toString(), false)
+                        .addField("Command Category", element.getCategory().getName(), false)
                         .addField("Command Aliases", aliases, false);
 
                 event.getMessage().getChannel().sendMessageEmbeds(commandInformation.build()).queue();

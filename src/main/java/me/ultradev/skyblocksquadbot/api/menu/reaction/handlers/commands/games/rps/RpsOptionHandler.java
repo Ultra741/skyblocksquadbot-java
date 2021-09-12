@@ -5,7 +5,7 @@ import me.ultradev.skyblocksquadbot.commands.categories.games.RpsCommand;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 
-public class RpsPaperHandler extends MenuReactionHandler {
+public class RpsOptionHandler extends MenuReactionHandler {
 
     @Override
     public void onReaction(GuildMessageReactionAddEvent event, Message message, String unicode) {
