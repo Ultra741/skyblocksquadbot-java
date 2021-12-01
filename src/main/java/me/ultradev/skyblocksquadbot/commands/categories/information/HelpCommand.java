@@ -1,6 +1,7 @@
 package me.ultradev.skyblocksquadbot.commands.categories.information;
 
 import me.ultradev.skyblocksquadbot.Main;
+import me.ultradev.skyblocksquadbot.api.util.MenuUtil;
 import me.ultradev.skyblocksquadbot.commands.Command;
 import me.ultradev.skyblocksquadbot.commands.CommandCategory;
 import me.ultradev.skyblocksquadbot.commands.CommandPermission;
@@ -10,6 +11,8 @@ import me.ultradev.skyblocksquadbot.api.menu.reaction.handlers.help.InformationC
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
+import java.util.function.Consumer;
 
 public class HelpCommand extends Command {
 
@@ -22,6 +25,15 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(JDABuilder builder, MessageReceivedEvent event, String[] args) {
+
+        Consumer<MenuReaction> consumer = menu -> {
+            menu.getMessage().editMessage("**Timed out.**").queue();
+            menu.getMessage().editMessageEmbeds().queue();
+            menu.getMessage().clearReactions().queue();
+        };
+
+        MenuUtil.removeMenus(event.getAuthor(), "help_information", consumer);
+        MenuUtil.removeMenus(event.getAuthor(), "help_fun_and_games");
 
         EmbedBuilder helpEmbed = new EmbedBuilder();
 
